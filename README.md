@@ -2,4 +2,6 @@
 
 #### To run locally,
 #### npm install
-#### npm start
+#### npm start (nodemon must be already installed)
+
+#### api endpoints at localhost:3000
