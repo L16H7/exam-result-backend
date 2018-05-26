@@ -6,7 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var finalResultsRouter = require('./routes/finalResults');
-
+var timeTableRouter = require('./routes/timeTable');
 var app = express();
 
 // view engine setup
@@ -21,6 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/api/final', finalResultsRouter);
+app.use('/api/timetable', timeTableRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
