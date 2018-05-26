@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 
-import BookList from "../containers/book-list";
-import BookDetail from "../containers/book-detail";
-
+import TimeTable from './timeTable/timeTable';
+import TableExampleStructured from './timeTable/testSemantic';
 
 export default class App extends Component {
   render() {
     return (
       <div>
-        <BookList />
-        <BookDetail />
+        <TimeTable />
+        <TableExampleStructured />
       </div>
     );
   }
