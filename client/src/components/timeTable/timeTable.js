@@ -4,11 +4,18 @@ import {Icon, Table} from 'semantic-ui-react';
 import { getTimeTable } from '../../actions/timeTable';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
+import timeTable from '../../reducers/timeTable'
 
 class TimeTable extends Component {
   componentDidMount() {
     this.props.getTimeTable(1);
   } 
+
+  componentWillReceiveProps(nextProps) {
+    console.log('np');
+    this.props = nextProps;
+    console.log(this.props.timeTable[0][0].subject);
+  }
 
   render() {
     return (
@@ -29,7 +36,7 @@ class TimeTable extends Component {
       <Table.Body>
         <Table.Row>
           <Table.Cell>Monday</Table.Cell>
-          <Table.Cell>M1</Table.Cell>
+          {/* <Table.Cell>{this.props.timeTable[0][0].subject}</Table.Cell> */}
           <Table.Cell>M2</Table.Cell>
           <Table.Cell>M3</Table.Cell>
           <Table.Cell rowSpan='5'></Table.Cell>
@@ -79,8 +86,12 @@ class TimeTable extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return state;
+}
+
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ getTimeTable }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(TimeTable);
+export default connect(mapStateToProps, mapDispatchToProps)(TimeTable);

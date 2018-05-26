@@ -1,10 +1,11 @@
-export default function(state = [], action) {
-  console.log(action);
+const INTIAL_STATE = {
+  timeTable: []
+};
+
+export default function(state = INTIAL_STATE, action) {
   switch (action.type) {
     case 'FETCH_TIME_TABLE':
       return [action.payload.data, ...state];
   }
-
-  console.log(state);
   return state;
 }
