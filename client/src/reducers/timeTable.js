@@ -5,7 +5,7 @@ const INTIAL_STATE = {
 export default function(state = INTIAL_STATE, action) {
   switch (action.type) {
     case 'FETCH_TIME_TABLE':
-      return [action.payload.data, ...state];
+      return action.payload.data;
   }
   return state;
 }
