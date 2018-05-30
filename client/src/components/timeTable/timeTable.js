@@ -13,7 +13,7 @@ class TimeTable extends Component {
 
   renderPeriods(periods) {
     console.log(periods);
-    let tableCells = periods.map(period => <Table.Cell key={period.id}>{period.subject}</Table.Cell>);
+    let tableCells = periods.map(period => <Table.Cell key={period.id}><b>{period.subject}</b></Table.Cell>);
     return tableCells;
   }
 
@@ -29,7 +29,7 @@ class TimeTable extends Component {
           <Table.HeaderCell rowSpan='2'>Period-1<br/>8:30-9:30 am</Table.HeaderCell>
           <Table.HeaderCell rowSpan='2'>Period-2<br/>9:35-10:35 am</Table.HeaderCell>
           <Table.HeaderCell rowSpan='2'>Period-3<br/>10:40-11:40 am</Table.HeaderCell>
-          <Table.HeaderCell rowSpan='5'>Lunch Break (11:40 - 12:40 pm)</Table.HeaderCell>
+          <Table.HeaderCell rowSpan='5'></Table.HeaderCell>
           <Table.HeaderCell rowSpan='2'>Period-4<br/>8:30-9:30 am</Table.HeaderCell>
           <Table.HeaderCell rowSpan='2'>Period-5<br/>9:35-10:35 am</Table.HeaderCell>
           <Table.HeaderCell rowSpan='2'>Period-6<br/>10:40-11:40 am</Table.HeaderCell>
@@ -37,14 +37,13 @@ class TimeTable extends Component {
       </Table.Header>
   
       <Table.Body>
+
         <Table.Row>
-        </Table.Row>
-        <Table.Row>
           <Table.Cell></Table.Cell>
           <Table.Cell></Table.Cell>
           <Table.Cell></Table.Cell>
-          <Table.Cell rowSpan='5'></Table.Cell>
           <Table.Cell></Table.Cell>
+          <Table.Cell  rowSpan='6' ><div className='vertical_text'>Lunch Break (11:40 - 12:40 pm)</div> </Table.Cell>
           <Table.Cell></Table.Cell>
           <Table.Cell></Table.Cell>
         </Table.Row>
@@ -54,30 +53,19 @@ class TimeTable extends Component {
         </Table.Row>
         <Table.Row>
           <Table.Cell>Monday</Table.Cell>
-          <Table.Cell>M1</Table.Cell>
-          <Table.Cell>M2</Table.Cell>
-          <Table.Cell>M3</Table.Cell>
-          <Table.Cell>M4</Table.Cell>
-          <Table.Cell>M5</Table.Cell>
-          <Table.Cell>M6</Table.Cell>
+          {this.renderPeriods(this.props.timeTable.filter(e => e.day == 2))}
         </Table.Row>
         <Table.Row>
           <Table.Cell>Monday</Table.Cell>
-          <Table.Cell>M1</Table.Cell>
-          <Table.Cell>M2</Table.Cell>
-          <Table.Cell>M3</Table.Cell>
-          <Table.Cell>M4</Table.Cell>
-          <Table.Cell>M5</Table.Cell>
-          <Table.Cell>M6</Table.Cell>
+          {this.renderPeriods(this.props.timeTable.filter(e => e.day == 3))}
         </Table.Row>
         <Table.Row>
           <Table.Cell>Monday</Table.Cell>
-          <Table.Cell>M1</Table.Cell>
-          <Table.Cell>M2</Table.Cell>
-          <Table.Cell>M3</Table.Cell>
-          <Table.Cell>M4</Table.Cell>
-          <Table.Cell>M5</Table.Cell>
-          <Table.Cell>M6</Table.Cell>
+          {this.renderPeriods(this.props.timeTable.filter(e => e.day == 4))}
+        </Table.Row>
+        <Table.Row>
+          <Table.Cell>Monday</Table.Cell>
+          {this.renderPeriods(this.props.timeTable.filter(e => e.day == 5))}
         </Table.Row>
       </Table.Body>
     </Table>
