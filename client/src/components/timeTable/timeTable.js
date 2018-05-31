@@ -52,19 +52,19 @@ class TimeTable extends Component {
           {this.renderPeriods(this.props.timeTable.filter(e => e.day == 1))}
         </Table.Row>
         <Table.Row>
-          <Table.Cell>Monday</Table.Cell>
+          <Table.Cell>Tuesday</Table.Cell>
           {this.renderPeriods(this.props.timeTable.filter(e => e.day == 2))}
         </Table.Row>
         <Table.Row>
-          <Table.Cell>Monday</Table.Cell>
+          <Table.Cell>Wednesday</Table.Cell>
           {this.renderPeriods(this.props.timeTable.filter(e => e.day == 3))}
         </Table.Row>
         <Table.Row>
-          <Table.Cell>Monday</Table.Cell>
+          <Table.Cell>Thursday</Table.Cell>
           {this.renderPeriods(this.props.timeTable.filter(e => e.day == 4))}
         </Table.Row>
         <Table.Row>
-          <Table.Cell>Monday</Table.Cell>
+          <Table.Cell>Friday</Table.Cell>
           {this.renderPeriods(this.props.timeTable.filter(e => e.day == 5))}
         </Table.Row>
       </Table.Body>
