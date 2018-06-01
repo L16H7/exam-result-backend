@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {Icon, Table} from 'semantic-ui-react';
 
-import { getTimeTable } from '../../actions/timeTable';
+import { getTimeTable } from '../../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 import timeTable from '../../reducers/timeTable'
@@ -12,13 +12,11 @@ class TimeTable extends Component {
   } 
 
   renderPeriods(periods) {
-    console.log(periods);
     let tableCells = periods.map(period => <Table.Cell key={period.id}><b>{period.subject}</b></Table.Cell>);
     return tableCells;
   }
 
   render() {
-    console.log(this.props.timeTable);
     if (!this.props.timeTable.length) return (<div></div>);
 
     return (
