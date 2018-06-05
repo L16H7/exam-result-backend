@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Sidebar, Segment, Button, Menu, Image, Icon, Header, Container } from 'semantic-ui-react'
+import { Link } from 'react-router-dom';
 
 class SideBar extends Component {
   state = { visible: false }
@@ -13,18 +14,18 @@ class SideBar extends Component {
         <Sidebar.Pushable as={Segment}>
           <Sidebar as={Menu} animation='overlay' visible={visible} icon='labeled' vertical inverted style={{ width: '300px' }}>
             <Menu.Item name='home'>
-              <Icon name='home' />
-              Home
+              <Link to='/'>Home</Link>
             </Menu.Item>
-            <Menu.Item name='gamepad'>
-              <Icon name='gamepad' />
-              Games
+            <Menu.Item name='result'>
+              <Link to='/result'>Result</Link>
             </Menu.Item>
-            <Menu.Item name='camera'>
-              <Icon name='camera' />
-              Channels
+            <Menu.Item name='timetable'>
+              <Link to='/timetable'>Time Table</Link>
             </Menu.Item>
-          </Sidebar>
+            <Menu.Item name='assignments'>
+              <Link to='/assignments'>Assignments</Link>
+            </Menu.Item>
+         </Sidebar>
           <Sidebar.Pusher>
             <Container style={{ height: '100vh' }}>
               <Button onClick={this.toggleVisibility} icon='list' content='Menu' />
