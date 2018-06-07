@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import LandingPageScreen from '../screens/LandingPageScreen';
 import TimeTableScreen from '../screens/TimeTableScreen';
+import FinalResultScreen from '../screens/FinalResultScreen';
 import SideBar from '../components/sidebar/sideBar';
 
 export default class App extends Component {
@@ -12,6 +13,7 @@ export default class App extends Component {
         <Switch>
           <Route exact={true} path='/' component={LandingPageScreen} />
           <Route path='/timeTable' component={TimeTableScreen} />
+          <Route path='/finalResult' component={FinalResultScreen} />
         </Switch>
       </SideBar>
     );

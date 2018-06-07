@@ -1,70 +1,51 @@
 import React, { Component } from "react";
 import {Icon, Table} from 'semantic-ui-react';
 
-import { getTimeTable } from '../../actions';
+import { getFinalResult } from '../../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
-import timeTable from '../../reducers/timeTable'
+import finalResult from '../../reducers/finalResult'
 
-class TimeTable extends Component {
+class FinalResult extends Component {
   componentDidMount() {
-    this.props.getTimeTable(1);
+    this.props.getFinalResult(2);
   } 
 
-  renderPeriods(periods) {
-    let tableCells = periods.map(period => <Table.Cell key={period.id}><b>{period.subject}</b></Table.Cell>);
-    return tableCells;
+  renderFinalResult(results) {
+    let tableRows = results.map(result => 
+
+        <Table.Row>
+            <Table.Cell><b>{result.name}</b></Table.Cell>
+            <Table.Cell><b>{result.rollNo}</b></Table.Cell>
+            <Table.Cell><b>{result.academicYear}</b></Table.Cell>
+            <Table.Cell><b>{result.result}</b></Table.Cell>
+        </Table.Row>
+                      
+                    
+    );
+    return tableRows;
   }
 
   render() {
-    if (!this.props.timeTable.length) return (<div></div>);
+    if (!this.props.finalResult.length) return (<div></div>);
 
     return (
       <Table celled structured>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell rowSpan='2'>Day/Time</Table.HeaderCell>
-          <Table.HeaderCell rowSpan='2'>Period-1<br/>8:30-9:30 am</Table.HeaderCell>
-          <Table.HeaderCell rowSpan='2'>Period-2<br/>9:35-10:35 am</Table.HeaderCell>
-          <Table.HeaderCell rowSpan='2'>Period-3<br/>10:40-11:40 am</Table.HeaderCell>
-          <Table.HeaderCell rowSpan='5'></Table.HeaderCell>
-          <Table.HeaderCell rowSpan='2'>Period-4<br/>8:30-9:30 am</Table.HeaderCell>
-          <Table.HeaderCell rowSpan='2'>Period-5<br/>9:35-10:35 am</Table.HeaderCell>
-          <Table.HeaderCell rowSpan='2'>Period-6<br/>10:40-11:40 am</Table.HeaderCell>
+          <Table.HeaderCell rowSpan='2'>Name</Table.HeaderCell>
+          <Table.HeaderCell rowSpan='2'>Roll No</Table.HeaderCell>
+          <Table.HeaderCell rowSpan='2'>Academic Year</Table.HeaderCell>
+          <Table.HeaderCell rowSpan='2'>Result</Table.HeaderCell>
+
         </Table.Row>
       </Table.Header>
   
       <Table.Body>
 
-        <Table.Row>
-          <Table.Cell></Table.Cell>
-          <Table.Cell></Table.Cell>
-          <Table.Cell></Table.Cell>
-          <Table.Cell></Table.Cell>
-          <Table.Cell  rowSpan='6' ><div className='vertical_text'>Lunch Break (11:40 - 12:40 pm)</div> </Table.Cell>
-          <Table.Cell></Table.Cell>
-          <Table.Cell></Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell>Monday</Table.Cell>
-          {this.renderPeriods(this.props.timeTable.filter(e => e.day == 1))}
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell>Tuesday</Table.Cell>
-          {this.renderPeriods(this.props.timeTable.filter(e => e.day == 2))}
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell>Wednesday</Table.Cell>
-          {this.renderPeriods(this.props.timeTable.filter(e => e.day == 3))}
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell>Thursday</Table.Cell>
-          {this.renderPeriods(this.props.timeTable.filter(e => e.day == 4))}
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell>Friday</Table.Cell>
-          {this.renderPeriods(this.props.timeTable.filter(e => e.day == 5))}
-        </Table.Row>
+        {this.renderFinalResult(this.props.finalResult)}
+
+
       </Table.Body>
     </Table>
     );
@@ -76,7 +57,7 @@ const mapStateToProps = (state) => {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getTimeTable }, dispatch);
+  return bindActionCreators({ getFinalResult }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TimeTable);
+export default connect(mapStateToProps, mapDispatchToProps)(FinalResult);

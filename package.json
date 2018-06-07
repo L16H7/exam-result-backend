@@ -8,5 +8,8 @@
     "install:client": "cd client && npm install",
     "install:server": "cd server && npm install"
   },
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "dependencies": {
+    "react-pagination-table": "^2.0.2"
+  }
 }

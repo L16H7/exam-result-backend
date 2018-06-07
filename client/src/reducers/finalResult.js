@@ -3,12 +3,12 @@ import {
   } from '../constants/types';
   
   const INTIAL_STATE = {
-    timeTable: []
+    finalResult: []
   };
   
   export default function(state = INTIAL_STATE, action) {
     switch (action.type) {
-      case FETCH_TIME_TABLE:
+      case FETCH_FINAL_RESULT:
         return action.payload.data;
     }
     return state;
