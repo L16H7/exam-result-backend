@@ -4,8 +4,8 @@ var connection = require('../database/connection');
 
 
 var getFinalResults = function(req, res) {
-  let tableName = `year_${req.params.year}_final`;
-  connection.query(`SELECT * FROM ${tableName}`, function(err, result) {
+  let academicYear = req.params.academicYear;
+  connection.query(`SELECT * FROM finalresult WHERE academicYear='${academicYear}'`, function(err, result) {
     if (err) {
       console.error(err);
       return res.status(400).send(err);
@@ -27,7 +27,7 @@ var postFinalResults = function(req, res) {
   });
 }
 
-router.get('/:year', getFinalResults);
+router.get('/:academicYear', getFinalResults);
 router.post('/:year', postFinalResults);
 
 module.exports = router;
