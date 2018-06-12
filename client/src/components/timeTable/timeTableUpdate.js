@@ -25,16 +25,35 @@ class TimeTableUpdate extends Component {
 
   changeSchoolYear(e, data) {
     this.props.getTimeTable(data.value);
-    console.log(this.state.timeTableData);
   }
 
   changeSubject(e, data) {
-    this.props.timeTable[10].subject = "JOKER";
-    console.log(this.props.timeTable[10]);
+    console.log('change subject');
+    console.log(data);
+
+    let newTimeTable = this.state.timeTableData.map((item, i) => {
+      if (i == 4) {
+        return { ...item, ["subject"]: "IT WORKS" };
+      }
+      return item;
+    });
+    console.log(newTimeTable);
+
+    this.setState({ timeTableData: newTimeTable });
+
+    console.log(this.state.timeTableData);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ timeTableData: nextProps.timeTable });
   }
 
   renderPeriods(periods) {
-    let tableCells = periods.map(period => <Table.Cell key={period.id}><Input value={period.subject} onChange={this.changeSubject} /></Table.Cell>);
+    periods.map((row, index) => {
+      // console.log(row, index);
+    });
+
+    let tableCells = periods.map((period, index) => <Table.Cell key={period.id}><Input value={period.subject} onChange={this.changeSubject} /><label>{index}</label></Table.Cell>);
     return tableCells;
   }
 
