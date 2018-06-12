@@ -29,19 +29,16 @@ class TimeTableUpdate extends Component {
 
   changeSubject(e, data) {
     console.log('change subject');
-    console.log(data);
 
     let newTimeTable = this.state.timeTableData.map((item, i) => {
       if (i == 4) {
-        return { ...item, ["subject"]: "IT WORKS" };
+        return { ...item, ["period1"]: "IT WORKS" };
       }
       return item;
     });
-    console.log(newTimeTable);
 
     this.setState({ timeTableData: newTimeTable });
 
-    console.log(this.state.timeTableData);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -50,10 +47,30 @@ class TimeTableUpdate extends Component {
 
   renderPeriods(periods) {
     periods.map((row, index) => {
-      // console.log(row, index);
+      console.log(row, index);
     });
 
-    let tableCells = periods.map((period, index) => <Table.Cell key={period.id}><Input value={period.subject} onChange={this.changeSubject} /><label>{index}</label></Table.Cell>);
+    let tableCells = periods.map((day, index) => 
+      <Table.Row>
+        <Table.Cell> 
+          <Input value={day.period1} onChange={this.changeSubject} />
+        </Table.Cell>
+        <Table.Cell>
+          <Input value={day.period2} onChange={this.changeSubject} />
+        </Table.Cell>
+        <Table.Cell>
+          <Input value={day.period3} onChange={this.changeSubject} />
+        </Table.Cell>
+        <Table.Cell>
+          <Input value={day.period4} onChange={this.changeSubject} />
+        </Table.Cell>
+        <Table.Cell>
+          <Input value={day.period5} onChange={this.changeSubject} />
+        </Table.Cell>
+        <Table.Cell>
+          <Input value={day.period6} onChange={this.changeSubject} />
+        </Table.Cell>
+      </Table.Row>);
     return tableCells;
   }
 
@@ -90,26 +107,7 @@ class TimeTableUpdate extends Component {
             <Table.Cell></Table.Cell>
             <Table.Cell></Table.Cell>
           </Table.Row>
-          <Table.Row>
-            <Table.Cell>Monday</Table.Cell>
-            {this.renderPeriods(this.state.timeTableData.filter(e => e.day == 1))}
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell>Tuesday</Table.Cell>
-            {this.renderPeriods(this.props.timeTable.filter(e => e.day == 2))}
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell>Wednesday</Table.Cell>
-            {this.renderPeriods(this.props.timeTable.filter(e => e.day == 3))}
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell>Thursday</Table.Cell>
-            {this.renderPeriods(this.props.timeTable.filter(e => e.day == 4))}
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell>Friday</Table.Cell>
-            {this.renderPeriods(this.props.timeTable.filter(e => e.day == 5))}
-          </Table.Row>
+          {this.renderPeriods(this.state.timeTableData)}
         </Table.Body>
         </Table>
       </Container>
