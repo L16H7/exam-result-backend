@@ -12,9 +12,9 @@ class TimeTableUpdate extends Component {
     super(props);
     this.changeSchoolYear = this.changeSchoolYear.bind(this);
     this.changeSubject = this.changeSubject.bind(this);
+    this.saveSubjectChange = this.saveSubjectChange.bind(this);
 
     this.state = {
-      periodSubject: '3',
       timeTableData: this.props.timeTable
     };
   }
@@ -28,11 +28,6 @@ class TimeTableUpdate extends Component {
   }
 
   changeSubject(index, period, subject) {
-    console.log('change subject');
-    console.log(index);
-    console.log(period);
-    console.log(subject);
-
     let newTimeTable = this.state.timeTableData.map((item, i) => {
       if (i == index) {
         return { ...item, [period]: subject };
@@ -41,7 +36,11 @@ class TimeTableUpdate extends Component {
     });
 
     this.setState({ timeTableData: newTimeTable });
+  }
 
+  saveSubjectChange(id, period, subject) {
+    console.log('to-do save');
+    console.log(`UPDATE timeTable SET ${period}=${subject} WHERE id=${id}`);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -50,24 +49,30 @@ class TimeTableUpdate extends Component {
 
   renderPeriods(periods) {
     let tableCells = periods.map((day, index) => 
-      <Table.Row>
-        <Table.Cell> 
-          <Input value={day.period1} onChange={(e) => this.changeSubject(index, 'period1', e.target.value)} />
+      <Table.Row key={day.id}>
+        <Table.Cell key={day.id + 1000}> 
+          <Input value={day.period1} onChange={(e) => this.changeSubject(index, 'period1', e.target.value)} 
+            onBlur={(e) => this.saveSubjectChange(day.id, 'period1', e.target.value)} />
         </Table.Cell>
-        <Table.Cell>
-          <Input value={day.period2} onChange={(e) => this.changeSubject(index, 'period2', e.target.value)} />
+        <Table.Cell key={day.id + 2000}>
+          <Input value={day.period2} onChange={(e) => this.changeSubject(index, 'period2', e.target.value)}
+            onBlur={(e) => this.saveSubjectChange(day.id, 'period2', e.target.value)} />
         </Table.Cell>
-        <Table.Cell>
-          <Input value={day.period3} onChange={(e) => this.changeSubject(index, 'period3', e.target.value)} />
+        <Table.Cell key={day.id + 3000}>
+          <Input value={day.period3} onChange={(e) => this.changeSubject(index, 'period3', e.target.value)}
+            onBlur={(e) => this.saveSubjectChange(day.id, 'period3', e.target.value)} />
         </Table.Cell>
-        <Table.Cell>
-          <Input value={day.period4} onChange={(e) => this.changeSubject(index, 'period4', e.target.value)} />
+        <Table.Cell key={day.id + 4000}>
+          <Input value={day.period4} onChange={(e) => this.changeSubject(index, 'period4', e.target.value)}
+            onBlur={(e) => this.saveSubjectChange(day.id, 'period4', e.target.value)} />
         </Table.Cell>
-        <Table.Cell>
-          <Input value={day.period5} onChange={(e) => this.changeSubject(index, 'period5', e.target.value)} />
+        <Table.Cell key={day.id + 5000}>
+          <Input value={day.period5} onChange={(e) => this.changeSubject(index, 'period5', e.target.value)}
+            onBlur={(e) => this.saveSubjectChange(day.id, 'period5', e.target.value)} />
         </Table.Cell>
-        <Table.Cell>
-          <Input value={day.period6} onChange={(e) => this.changeSubject(index, 'period6', e.target.value)} />
+        <Table.Cell key={day.id + 6000}>
+          <Input value={day.period6} onChange={(e) => this.changeSubject(index, 'period6', e.target.value)}
+            onBlur={(e) => this.saveSubjectChange(day.id, 'period6', e.target.value)} />
         </Table.Cell>
       </Table.Row>);
     return tableCells;
