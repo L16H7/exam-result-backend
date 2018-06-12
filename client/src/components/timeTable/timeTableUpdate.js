@@ -27,12 +27,15 @@ class TimeTableUpdate extends Component {
     this.props.getTimeTable(data.value);
   }
 
-  changeSubject(e, data) {
+  changeSubject(index, period, subject) {
     console.log('change subject');
+    console.log(index);
+    console.log(period);
+    console.log(subject);
 
     let newTimeTable = this.state.timeTableData.map((item, i) => {
-      if (i == 4) {
-        return { ...item, ["period1"]: "IT WORKS" };
+      if (i == index) {
+        return { ...item, [period]: subject };
       }
       return item;
     });
@@ -46,29 +49,25 @@ class TimeTableUpdate extends Component {
   }
 
   renderPeriods(periods) {
-    periods.map((row, index) => {
-      console.log(row, index);
-    });
-
     let tableCells = periods.map((day, index) => 
       <Table.Row>
         <Table.Cell> 
-          <Input value={day.period1} onChange={this.changeSubject} />
+          <Input value={day.period1} onChange={(e) => this.changeSubject(index, 'period1', e.target.value)} />
         </Table.Cell>
         <Table.Cell>
-          <Input value={day.period2} onChange={this.changeSubject} />
+          <Input value={day.period2} onChange={(e) => this.changeSubject(index, 'period2', e.target.value)} />
         </Table.Cell>
         <Table.Cell>
-          <Input value={day.period3} onChange={this.changeSubject} />
+          <Input value={day.period3} onChange={(e) => this.changeSubject(index, 'period3', e.target.value)} />
         </Table.Cell>
         <Table.Cell>
-          <Input value={day.period4} onChange={this.changeSubject} />
+          <Input value={day.period4} onChange={(e) => this.changeSubject(index, 'period4', e.target.value)} />
         </Table.Cell>
         <Table.Cell>
-          <Input value={day.period5} onChange={this.changeSubject} />
+          <Input value={day.period5} onChange={(e) => this.changeSubject(index, 'period5', e.target.value)} />
         </Table.Cell>
         <Table.Cell>
-          <Input value={day.period6} onChange={this.changeSubject} />
+          <Input value={day.period6} onChange={(e) => this.changeSubject(index, 'period6', e.target.value)} />
         </Table.Cell>
       </Table.Row>);
     return tableCells;
