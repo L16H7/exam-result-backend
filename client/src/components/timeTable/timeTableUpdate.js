@@ -41,6 +41,9 @@ class TimeTableUpdate extends Component {
 
 
   changeSubject(index, period, subject) {
+    if (!subject) {
+      alert('Subject cannot be empty!');
+    }
     let newTimeTable = this.state.timeTableData.map((item, i) => {
       if (i == index) {
         return { ...item, [period]: subject };
@@ -52,7 +55,7 @@ class TimeTableUpdate extends Component {
   }
 
   saveSubjectChange(id, period, subject) {
-    this.props.updatePeriodSubject(id, period, subject);
+    if (subject) this.props.updatePeriodSubject(id, period, subject);
   }
 
   componentWillReceiveProps(nextProps) {
