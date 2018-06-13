@@ -1,7 +1,8 @@
-## Express App for Exam Result Backend with MySQL Sample
+## React, Express, MySQL
 
 #### To run locally,
-#### npm install
-#### npm start (nodemon must be already installed)
+#### npm run postinstall
+#### npm run dev
 
 #### api endpoints at localhost:3000
+#### client localhost:8080
