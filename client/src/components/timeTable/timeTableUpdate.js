@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Icon, Input, Label, Select, Table } from 'semantic-ui-react';
+import { Container, Icon, Input, Label, Radio, Select, Table } from 'semantic-ui-react';
 
 import { getTimeTable, updatePeriodSubject } from '../../actions';
 import { schoolYears } from '../../constants/schoolYears';
@@ -13,15 +13,21 @@ class TimeTableUpdate extends Component {
     this.changeSchoolYear = this.changeSchoolYear.bind(this);
     this.changeSubject = this.changeSubject.bind(this);
     this.saveSubjectChange = this.saveSubjectChange.bind(this);
+    this.toggleEditableTable = this.toggleEditableTable.bind(this);
 
     this.state = {
-      timeTableData: this.props.timeTable
+      timeTableData: this.props.timeTable,
+      isInputEnable: false
     };
   }
 
   componentDidMount() {
     this.props.getTimeTable(1);
   } 
+
+  toggleEditableTable() {
+    this.setState({ isInputEnable: !this.state.isInputEnable });
+  }
 
   changeSchoolYear(e, data) {
     this.props.getTimeTable(data.value);
@@ -54,27 +60,33 @@ class TimeTableUpdate extends Component {
         </Table.Cell>
         <Table.Cell key={day.id + 1000}> 
           <Input value={day.period1} onChange={(e) => this.changeSubject(index, 'period1', e.target.value)} 
-            onBlur={(e) => this.saveSubjectChange(day.id, 'period1', e.target.value)} />
+            onBlur={(e) => this.saveSubjectChange(day.id, 'period1', e.target.value)} 
+            disabled={!this.state.isInputEnable} />
         </Table.Cell>
         <Table.Cell key={day.id + 2000}>
           <Input value={day.period2} onChange={(e) => this.changeSubject(index, 'period2', e.target.value)}
-            onBlur={(e) => this.saveSubjectChange(day.id, 'period2', e.target.value)} />
+            onBlur={(e) => this.saveSubjectChange(day.id, 'period2', e.target.value)}
+            disabled={!this.state.isInputEnable} />
         </Table.Cell>
         <Table.Cell key={day.id + 3000}>
           <Input value={day.period3} onChange={(e) => this.changeSubject(index, 'period3', e.target.value)}
-            onBlur={(e) => this.saveSubjectChange(day.id, 'period3', e.target.value)} />
+            onBlur={(e) => this.saveSubjectChange(day.id, 'period3', e.target.value)}
+            disabled={!this.state.isInputEnable} />
         </Table.Cell>
         <Table.Cell key={day.id + 4000}>
           <Input value={day.period4} onChange={(e) => this.changeSubject(index, 'period4', e.target.value)}
-            onBlur={(e) => this.saveSubjectChange(day.id, 'period4', e.target.value)} />
+            onBlur={(e) => this.saveSubjectChange(day.id, 'period4', e.target.value)}
+            disabled={!this.state.isInputEnable} />
         </Table.Cell>
         <Table.Cell key={day.id + 5000}>
           <Input value={day.period5} onChange={(e) => this.changeSubject(index, 'period5', e.target.value)}
-            onBlur={(e) => this.saveSubjectChange(day.id, 'period5', e.target.value)} />
+            onBlur={(e) => this.saveSubjectChange(day.id, 'period5', e.target.value)}
+            disabled={!this.state.isInputEnable} />
         </Table.Cell>
         <Table.Cell key={day.id + 6000}>
           <Input value={day.period6} onChange={(e) => this.changeSubject(index, 'period6', e.target.value)}
-            onBlur={(e) => this.saveSubjectChange(day.id, 'period6', e.target.value)} />
+            onBlur={(e) => this.saveSubjectChange(day.id, 'period6', e.target.value)}
+            disabled={!this.state.isInputEnable} />
         </Table.Cell>
       </Table.Row>);
     return tableCells;
@@ -82,12 +94,16 @@ class TimeTableUpdate extends Component {
 
   render() {
     if (!this.state.timeTableData.length) return (
-      <Select placeholder='Select school year' options={schoolYears} onChange={this.changeSchoolYear} />
+      <Container>
+        <Select placeholder='Select school year' options={schoolYears} onChange={this.changeSchoolYear} />
+        <Radio toggle onChange={this.toggleEditableTable} checked={this.state.isInputEnable} />
+      </Container>
     );
 
     return (
       <Container>
         <Select placeholder='Select school year' options={schoolYears} onChange={this.changeSchoolYear} />
+        <Radio toggle onChange={this.toggleEditableTable} checked={this.state.isInputEnable} />
         <Table celled structured>
         <Table.Header>
           <Table.Row>

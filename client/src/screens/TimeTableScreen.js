@@ -8,7 +8,6 @@ class TimeTableScreen extends Component {
   render() {
     return (
       <Container>
-        {/* <TimeTable /> */}
         <TimeTableUpdate />
       </Container>
     );
