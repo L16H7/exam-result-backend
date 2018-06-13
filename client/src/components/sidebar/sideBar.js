@@ -25,6 +25,9 @@ class SideBar extends Component {
             <Menu.Item name='assignments'>
               <Link to='/assignments'>Assignments</Link>
             </Menu.Item>
+            <Menu.Item name='curriculum'>
+              <Link to='/curriculum'>Curriculum</Link>
+            </Menu.Item>
          </Sidebar>
           <Sidebar.Pusher>
             <Container style={{ height: '100vh' }}>
