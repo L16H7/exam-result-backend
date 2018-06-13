@@ -3,6 +3,7 @@ import { Container, Icon, Input, Label, Radio, Select, Table } from 'semantic-ui
 
 import { getTimeTable, updatePeriodSubject } from '../../actions';
 import { schoolYears } from '../../constants/schoolYears';
+import { dayId } from '../../constants/dayId';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 import timeTable from '../../reducers/timeTable'
@@ -33,6 +34,12 @@ class TimeTableUpdate extends Component {
     this.props.getTimeTable(data.value);
   }
 
+  convertDayIdToDayName(id) {
+    let day = dayId.find(function (e) { return e.key === id; });
+    return day.name;
+  }
+
+
   changeSubject(index, period, subject) {
     let newTimeTable = this.state.timeTableData.map((item, i) => {
       if (i == index) {
@@ -53,40 +60,46 @@ class TimeTableUpdate extends Component {
   }
 
   renderPeriods(periods) {
-    let tableCells = periods.map((day, index) => 
-      <Table.Row key={day.id}>
-        <Table.Cell key={day.id + 999}>
-          <Label>{day.day}</Label>
+    let tableCells = periods.map((dayData, index) => 
+      <Table.Row key={dayData.id}>
+        <Table.Cell key={dayData.id + 999}>
+          <Label className='color-inherit' size={'large'}>{this.convertDayIdToDayName(dayData.day)}</Label>
         </Table.Cell>
-        <Table.Cell key={day.id + 1000}> 
-          <Input value={day.period1} onChange={(e) => this.changeSubject(index, 'period1', e.target.value)} 
-            onBlur={(e) => this.saveSubjectChange(day.id, 'period1', e.target.value)} 
-            disabled={!this.state.isInputEnable} />
+        <Table.Cell key={dayData.id + 1000}> 
+          <Input value={dayData.period1} onChange={(e) => this.changeSubject(index, 'period1', e.target.value)} 
+            onBlur={(e) => this.saveSubjectChange(dayData.id, 'period1', e.target.value)} 
+            disabled={!this.state.isInputEnable}
+            className={!this.state.isInputEnable ? 'custom-input' : '' } />
         </Table.Cell>
-        <Table.Cell key={day.id + 2000}>
-          <Input value={day.period2} onChange={(e) => this.changeSubject(index, 'period2', e.target.value)}
-            onBlur={(e) => this.saveSubjectChange(day.id, 'period2', e.target.value)}
-            disabled={!this.state.isInputEnable} />
+        <Table.Cell key={dayData.id + 2000}>
+          <Input value={dayData.period2} onChange={(e) => this.changeSubject(index, 'period2', e.target.value)}
+            onBlur={(e) => this.saveSubjectChange(dayData.id, 'period2', e.target.value)}
+            disabled={!this.state.isInputEnable}
+            className={!this.state.isInputEnable ? 'custom-input' : '' } />
         </Table.Cell>
-        <Table.Cell key={day.id + 3000}>
-          <Input value={day.period3} onChange={(e) => this.changeSubject(index, 'period3', e.target.value)}
-            onBlur={(e) => this.saveSubjectChange(day.id, 'period3', e.target.value)}
-            disabled={!this.state.isInputEnable} />
+        <Table.Cell key={dayData.id + 3000}>
+          <Input value={dayData.period3} onChange={(e) => this.changeSubject(index, 'period3', e.target.value)}
+            onBlur={(e) => this.saveSubjectChange(dayData.id, 'period3', e.target.value)}
+            disabled={!this.state.isInputEnable}
+            className={!this.state.isInputEnable ? 'custom-input' : '' } />
         </Table.Cell>
-        <Table.Cell key={day.id + 4000}>
-          <Input value={day.period4} onChange={(e) => this.changeSubject(index, 'period4', e.target.value)}
-            onBlur={(e) => this.saveSubjectChange(day.id, 'period4', e.target.value)}
-            disabled={!this.state.isInputEnable} />
+        <Table.Cell key={dayData.id + 4000}>
+          <Input value={dayData.period4} onChange={(e) => this.changeSubject(index, 'period4', e.target.value)}
+            onBlur={(e) => this.saveSubjectChange(dayData.id, 'period4', e.target.value)}
+            disabled={!this.state.isInputEnable}
+            className={!this.state.isInputEnable ? 'custom-input' : '' } />
         </Table.Cell>
-        <Table.Cell key={day.id + 5000}>
-          <Input value={day.period5} onChange={(e) => this.changeSubject(index, 'period5', e.target.value)}
-            onBlur={(e) => this.saveSubjectChange(day.id, 'period5', e.target.value)}
-            disabled={!this.state.isInputEnable} />
+        <Table.Cell key={dayData.id + 5000}>
+          <Input value={dayData.period5} onChange={(e) => this.changeSubject(index, 'period5', e.target.value)}
+            onBlur={(e) => this.saveSubjectChange(dayData.id, 'period5', e.target.value)}
+            disabled={!this.state.isInputEnable}
+            className={!this.state.isInputEnable ? 'custom-input' : '' } />
         </Table.Cell>
-        <Table.Cell key={day.id + 6000}>
-          <Input value={day.period6} onChange={(e) => this.changeSubject(index, 'period6', e.target.value)}
-            onBlur={(e) => this.saveSubjectChange(day.id, 'period6', e.target.value)}
-            disabled={!this.state.isInputEnable} />
+        <Table.Cell key={dayData.id + 6000}>
+          <Input value={dayData.period6} onChange={(e) => this.changeSubject(index, 'period6', e.target.value)}
+            onBlur={(e) => this.saveSubjectChange(dayData.id, 'period6', e.target.value)}
+            disabled={!this.state.isInputEnable}
+            className={!this.state.isInputEnable ? 'custom-input' : '' } />
         </Table.Cell>
       </Table.Row>);
     return tableCells;
