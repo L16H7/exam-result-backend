@@ -6,3 +6,16 @@
 .font_bold{
     font-weight: bold;
 }
+
+.color-inherit {
+  background-color: inherit !important;
+}
+
+.custom-input {
+  border: none !important;
+  opacity: 1 !important;
+}
+
+.custom-input > input {
+  border: none !important;
+}
