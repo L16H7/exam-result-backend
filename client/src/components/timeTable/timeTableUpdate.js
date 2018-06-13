@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Container, Icon, Input, Select, Table } from 'semantic-ui-react';
+import { Container, Icon, Input, Label, Select, Table } from 'semantic-ui-react';
 
-import { getTimeTable } from '../../actions';
+import { getTimeTable, updatePeriodSubject } from '../../actions';
 import { schoolYears } from '../../constants/schoolYears';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
@@ -39,8 +39,7 @@ class TimeTableUpdate extends Component {
   }
 
   saveSubjectChange(id, period, subject) {
-    console.log('to-do save');
-    console.log(`UPDATE timeTable SET ${period}=${subject} WHERE id=${id}`);
+    this.props.updatePeriodSubject(id, period, subject);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -50,6 +49,9 @@ class TimeTableUpdate extends Component {
   renderPeriods(periods) {
     let tableCells = periods.map((day, index) => 
       <Table.Row key={day.id}>
+        <Table.Cell key={day.id + 999}>
+          <Label>{day.day}</Label>
+        </Table.Cell>
         <Table.Cell key={day.id + 1000}> 
           <Input value={day.period1} onChange={(e) => this.changeSubject(index, 'period1', e.target.value)} 
             onBlur={(e) => this.saveSubjectChange(day.id, 'period1', e.target.value)} />
@@ -124,7 +126,7 @@ const mapStateToProps = (state) => {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getTimeTable }, dispatch);
+  return bindActionCreators({ getTimeTable, updatePeriodSubject }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimeTableUpdate);
