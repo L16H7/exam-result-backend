@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 27, 2018 at 03:58 PM
+-- Generation Time: Jun 13, 2018 at 03:34 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.1.13
 
@@ -76,46 +76,25 @@ CREATE TABLE `finalResult` (
 CREATE TABLE `timeTable` (
   `id` int(11) NOT NULL,
   `day` int(1) NOT NULL,
-  `period` int(1) NOT NULL,
-  `subject` varchar(100) NOT NULL,
-  `academicYear` varchar(50) NOT NULL
+  `period1` varchar(20) NOT NULL,
+  `period2` varchar(20) NOT NULL,
+  `period3` varchar(20) NOT NULL,
+  `period4` varchar(20) NOT NULL,
+  `period5` varchar(20) NOT NULL,
+  `period6` varchar(20) NOT NULL,
+  `academicYear` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `timeTable`
 --
 
-INSERT INTO `timeTable` (`id`, `day`, `period`, `subject`, `academicYear`) VALUES
-(1, 1, 1, 'EcE 5014', '1'),
-(2, 1, 2, 'EcE 5014', '1'),
-(3, 1, 3, 'EcE 5014', '1'),
-(4, 1, 4, 'EcE 5015', '1'),
-(5, 1, 5, 'EcE 5015', '1'),
-(6, 1, 6, 'EcE 5015', '1'),
-(7, 2, 1, 'EcE 5014', '1'),
-(8, 2, 2, 'EcE 5011', '1'),
-(9, 2, 3, 'EcE 5011', '1'),
-(10, 2, 4, 'EcE 5015', '1'),
-(11, 2, 5, 'EcE 5015', '1'),
-(12, 2, 6, 'EcE 5016', '1'),
-(13, 3, 1, 'EcE 5012', '1'),
-(14, 3, 2, 'EcE 5012', '1'),
-(15, 3, 3, 'EcE 5012', '1'),
-(16, 3, 4, 'EcE 5013', '1'),
-(17, 3, 5, 'EcE 5013', '1'),
-(18, 3, 6, 'EcE 5013', '1'),
-(19, 4, 1, 'EcE 5011', '1'),
-(20, 4, 2, 'EcE 5011', '1'),
-(21, 4, 3, 'EcE 5024', '1'),
-(22, 4, 4, 'EcE 5023', '1'),
-(23, 4, 5, 'EcE 5023', '1'),
-(24, 4, 6, 'EcE 5023', '1'),
-(25, 5, 1, 'EcE 5023', '1'),
-(26, 5, 2, 'EcE 5023', '1'),
-(27, 5, 3, 'EcE 5012', '1'),
-(28, 5, 4, 'EcE 5024', '1'),
-(29, 5, 5, 'EcE 5024', '1'),
-(30, 5, 6, 'EcE 5024', '1');
+INSERT INTO `timeTable` (`id`, `day`, `period1`, `period2`, `period3`, `period4`, `period5`, `period6`, `academicYear`) VALUES
+(31, 1, 'M1', 'M2', 'M3', 'M4', 'M5', 'M6', 2),
+(32, 2, 'Tu1', 'Tu2', 'Tu3', 'Tu4', 'Tu5', 'Tu6', 2),
+(33, 3, 'W1', 'W2', 'W3', 'W4', 'W5', 'W6', 2),
+(34, 4, 'TH1', 'TH2', 'TH3', 'TH4', 'TH5', 'TH6', 2),
+(35, 5, 'F1', 'F2', 'dgdf', 'F4', 'F5', 'F6', 2);
 
 -- --------------------------------------------------------
 
@@ -180,7 +159,7 @@ ALTER TABLE `finalResult`
 -- AUTO_INCREMENT for table `timeTable`
 --
 ALTER TABLE `timeTable`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
