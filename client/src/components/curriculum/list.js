@@ -34,14 +34,24 @@ class CurriculumList extends Component {
     curriculums = curriculums.slice(0, this.state.limit);
     if (curriculums.length) {
       curriculums.forEach((item, index) => {
-        if (index % 3 === 0) {
+        if (index % 3 === 0 && (index + 2) < curriculums.length) {
           groups.push([curriculums[index], curriculums[index + 1], curriculums[index + 2]]);
+        }
+        if (index % 3 === 0 && (index + 2) > curriculums.length) {
+          let lastRemaining = [];
+          while (index < curriculums.length) {
+            lastRemaining.push(curriculums[index++]);
+          }
+          groups.push(lastRemaining);
         }
       });
 
-      let cards = groups.map((cardData) =>
+      console.log(groups);
+
+      let cards = groups.map((cardData, index) =>
         <Grid.Row columns={3} key={cardData[0].id}>
           <Grid.Column>
+        {index}
             <CurriculumCard 
               curriculumDate={cardData[0].curriculumDate}
               period={cardData[0].period}
