@@ -46,7 +46,6 @@ class CurriculumList extends Component {
         }
       });
 
-      console.log(groups);
 
       let cards = groups.map((cardData, index) =>
         <Grid.Row columns={3} key={cardData[0].id}>
@@ -74,11 +73,11 @@ class CurriculumList extends Component {
     }
 
     return (
-      <Container>
+      <Container className="scrollable">
         <Grid>
           {this.renderCards(this.props.curriculum)}
         </Grid>
-        <Button onClick={this.onLoadMore}>Load More</Button>
+        <Button className={'load-more'} onClick={this.onLoadMore}>Load More</Button>
       </Container>
     );
   }
