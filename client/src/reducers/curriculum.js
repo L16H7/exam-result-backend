@@ -3,7 +3,7 @@ import {
 } from '../constants/types';
 
 const INITIAL_STATE = {
-  curriculm: []
+  curriculum: []
 };
 
 export default function (state = INITIAL_STATE, action) {

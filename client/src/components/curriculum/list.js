@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Grid } from 'semantic-ui-react';
+import { Container, Grid } from 'semantic-ui-react';
 import CurriculumCard from './card';
 
 import { getLatestCurriculum } from '../../actions/curriculum';
@@ -17,23 +17,58 @@ class CurriculumList extends Component {
     console.log(nextProps);
   }
 
-  render() {
-    return (
-      <Grid>
-        <Grid.Row columns={3}>
+  renderCards(curriculums) {
+    let groups = [];
+
+    if (curriculums.length) {
+      curriculums.forEach((item, index) => {
+        if (index % 3 === 0) {
+          groups.push([curriculums[index], curriculums[index + 1], curriculums[index + 2]]);
+        }
+      });
+
+      let cards = groups.map((cardData) =>
+        <Grid.Row columns={3} key={cardData[0].id}>
           <Grid.Column>
-            <CurriculumCard curriculumDate={'2018-06-23'} period={'Period 1'} subject={'Chemistry'} 
-              description={'Test Test Test Test Test Test Test Test Test Test Description'} />
-          </Grid.Column>
-          <Grid.Column> 
-            <CurriculumCard curriculumDate={'2018-06-23'} period={'Period 1'} subject={'Chemistry'} description={'Test Description'} />
+            <CurriculumCard 
+              curriculumDate={cardData[0].curriculumDate}
+              period={cardData[0].period}
+              subject={cardData[0].subject}
+              description={cardData[0].description}
+            />
           </Grid.Column>
           <Grid.Column>
-            <CurriculumCard curriculumDate={'2018-06-23'} period={'Period 1'} subject={'Chemistry'} description={'Test Description'} />
+            <CurriculumCard 
+              curriculumDate={cardData[1].curriculumDate}
+              period={cardData[1].period}
+              subject={cardData[1].subject}
+              description={cardData[1].description}
+            />
+          </Grid.Column>
+          <Grid.Column>
+            <CurriculumCard 
+              curriculumDate={cardData[2].curriculumDate}
+              period={cardData[2].period}
+              subject={cardData[2].subject}
+              description={cardData[2].description}
+            />
           </Grid.Column>
         </Grid.Row>
-        <CurriculumCard curriculumDate={'2018-06-23'} period={'Period 1'} subject={'Chemistry'} description={'Test Description'} />
-        <CurriculumCard curriculumDate={'2018-06-23'} period={'Period 1'} subject={'Chemistry'} description={'Test Description'} />
+      );
+      return cards;
+    }
+  }
+
+  render() {
+    if (!this.props.curriculum.length) {
+      return (
+        <div></div>
+      );
+    }
+
+    return (
+      <Grid>
+        {this.renderCards(this.props.curriculum)}
       </Grid>
     );
   }
