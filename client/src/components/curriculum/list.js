@@ -3,7 +3,20 @@ import React, { Component } from 'react';
 import { Grid } from 'semantic-ui-react';
 import CurriculumCard from './card';
 
+import { getLatestCurriculum } from '../../actions/curriculum';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+
 class CurriculumList extends Component {
+  componentDidMount() {
+    this.props.getLatestCurriculum();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+  }
+
   render() {
     return (
       <Grid>
@@ -26,4 +39,12 @@ class CurriculumList extends Component {
   }
 }
 
-export default CurriculumList;
+const mapStateToProps = (state) => {
+  return state;
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ getLatestCurriculum }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CurriculumList);
