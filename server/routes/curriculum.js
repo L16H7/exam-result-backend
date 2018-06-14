@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 var connection = require('../database/connection');
 
-var getLatest9Entry = function (req, res) {
-  const query = 'SELECT * FROM `curriculum` ORDER BY curriculumDate DESC LIMIT 9';
+var getLatest = function (req, res) {
+  const query = 'SELECT * FROM `curriculum` ORDER BY curriculumDate DESC';
   connection.query(query, function (err, result) {
     if (err) {
       console.error(err);
@@ -14,6 +14,6 @@ var getLatest9Entry = function (req, res) {
   });
 };
 
-router.get('/latest', getLatest9Entry);
+router.get('/latest', getLatest);
 
 module.exports = router;

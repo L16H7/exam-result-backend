@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Container, Grid } from 'semantic-ui-react';
+import { Button, Container, Grid } from 'semantic-ui-react';
 import CurriculumCard from './card';
 
 import { getLatestCurriculum } from '../../actions/curriculum';
@@ -9,17 +9,29 @@ import { bindActionCreators } from 'redux';
 
 
 class CurriculumList extends Component {
+  constructor(props) {
+    super(props);
+
+    this.onLoadMore = this.onLoadMore.bind(this);
+
+    this.state = { 
+      limit: 9
+    };
+
+  }
+
   componentDidMount() {
     this.props.getLatestCurriculum();
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
+  onLoadMore() {
+    this.setState({ limit: this.state.limit + 9 });
   }
 
   renderCards(curriculums) {
     let groups = [];
 
+    curriculums = curriculums.slice(0, this.state.limit);
     if (curriculums.length) {
       curriculums.forEach((item, index) => {
         if (index % 3 === 0) {
@@ -67,9 +79,12 @@ class CurriculumList extends Component {
     }
 
     return (
-      <Grid>
-        {this.renderCards(this.props.curriculum)}
-      </Grid>
+      <Container>
+        <Grid>
+          {this.renderCards(this.props.curriculum)}
+        </Grid>
+        <Button onClick={this.onLoadMore}>Load More</Button>
+      </Container>
     );
   }
 }
