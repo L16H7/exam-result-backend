@@ -50,31 +50,16 @@ class CurriculumList extends Component {
 
       let cards = groups.map((cardData, index) =>
         <Grid.Row columns={3} key={cardData[0].id}>
-          <Grid.Column>
-        {index}
-            <CurriculumCard 
-              curriculumDate={cardData[0].curriculumDate}
-              period={cardData[0].period}
-              subject={cardData[0].subject}
-              description={cardData[0].description}
-            />
-          </Grid.Column>
-          <Grid.Column>
-            <CurriculumCard 
-              curriculumDate={cardData[1].curriculumDate}
-              period={cardData[1].period}
-              subject={cardData[1].subject}
-              description={cardData[1].description}
-            />
-          </Grid.Column>
-          <Grid.Column>
-            <CurriculumCard 
-              curriculumDate={cardData[2].curriculumDate}
-              period={cardData[2].period}
-              subject={cardData[2].subject}
-              description={cardData[2].description}
-            />
-          </Grid.Column>
+          {cardData.map(card => 
+            <Grid.Column key={card.id}>
+              <CurriculumCard 
+                curriculumDate={card.curriculumDate}
+                period={card.period}
+                subject={card.subject}
+                description={card.description}
+              />
+            </Grid.Column>
+          )}
         </Grid.Row>
       );
       return cards;
