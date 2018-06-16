@@ -34,9 +34,9 @@ var getCurriculumById = function (req, res) {
 
 var updateCurriculumById = function (req, res) {
   let id = req.params.id;
-  const curriculum = req.body;
+  const { curriculumDate, period, subject, description } = req.body;
 
-  const query = `UPDATE curriculum SET description='${curriculum.description}' WHERE id=${id}`;
+  const query = `UPDATE curriculum SET curriculumDate='${curriculumDate}', period=${period}, subject='${subject}', description='${description}' WHERE id=${id}`;
 
   connection.query(query, function (err, result) {
     if (err) {

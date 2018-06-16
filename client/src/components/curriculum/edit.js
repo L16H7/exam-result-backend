@@ -42,8 +42,7 @@ class CurriculumEdit extends Component {
   }
 
   saveChanges = () => {
-    // this.props.updateCurriculumById(this.state.curriculum.id, this.state.curriculum);
-    this.props.updateCurriculumById(6, this.state.curriculum);
+    this.props.updateCurriculumById(this.state.curriculum.id, this.state.curriculum);
   }
 
   render() {
