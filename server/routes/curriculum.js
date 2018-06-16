@@ -17,6 +17,22 @@ var getLatest = function (req, res) {
   });
 };
 
+var getCurriculumById = function (req, res) {
+  let id = req.params.id;
+
+  const query = `SELECT * FROM curriculum WHERE id=${id}`;
+
+  connection.query(query, function (err, result) {
+    if (err) {
+      console.error(err);
+      return res.status(400).send(err);
+    }
+
+    return res.status(200).send(result);
+  });
+};
+
 router.get('/latest/:year', getLatest);
+router.get('/:id', getCurriculumById);
 
 module.exports = router;

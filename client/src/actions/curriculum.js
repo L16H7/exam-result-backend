@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 import {
-  FETCH_LATEST_CURRICULUM_SUCCESS
+  FETCH_LATEST_CURRICULUM_SUCCESS,
+  FETCH_CURRICULUM_BY_ID
 } from '../constants/types';
 
 import {
@@ -16,6 +17,16 @@ export function getLatestCurriculum(year) {
 
   return {
     type: FETCH_LATEST_CURRICULUM_SUCCESS,
+    payload: request
+  };
+}
+
+export function getCurriculumById(id) {
+  const url = `${baseUrl}/${id}`;
+  const request = axios.get(url);
+
+  return {
+    type: FETCH_CURRICULUM_BY_ID,
     payload: request
   };
 }
