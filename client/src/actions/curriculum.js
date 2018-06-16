@@ -2,7 +2,8 @@ import axios from 'axios';
 
 import {
   FETCH_LATEST_CURRICULUM_SUCCESS,
-  FETCH_CURRICULUM_BY_ID
+  FETCH_CURRICULUM_BY_ID,
+  UPDATE_CURRICULUM_BY_ID
 } from '../constants/types';
 
 import {
@@ -29,4 +30,14 @@ export function getCurriculumById(id) {
     type: FETCH_CURRICULUM_BY_ID,
     payload: request
   };
+}
+
+export function updateCurriculumById(id, newCurriculum) {
+  const url = `${baseUrl}/${id}`;
+  const request = axios.put(url, newCurriculum);
+
+  return {
+    type: UPDATE_CURRICULUM_BY_ID,
+    payload: request
+  }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Checkbox, Input, Form, Label } from 'semantic-ui-react';
 
-import { getCurriculumById } from '../../actions';
+import { getCurriculumById, updateCurriculumById } from '../../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -11,6 +11,7 @@ class CurriculumEdit extends Component {
 
     this.state = {
       curriculum: {
+        id: 0,
         curriculumDate: '2018-06-30',
         period: 0,
         subject: '',
@@ -27,8 +28,6 @@ class CurriculumEdit extends Component {
     let newCurriculum = props.curriculum[0];
     newCurriculum.curriculumDate = newCurriculum.curriculumDate.slice(0, 10);
     
-    console.log(newCurriculum);
-
     this.setState({ curriculum: newCurriculum });
   }
   
@@ -40,6 +39,11 @@ class CurriculumEdit extends Component {
     };
 
     this.setState({ curriculum: newCurriculum });
+  }
+
+  saveChanges = () => {
+    // this.props.updateCurriculumById(this.state.curriculum.id, this.state.curriculum);
+    this.props.updateCurriculumById(6, this.state.curriculum);
   }
 
   render() {
@@ -68,7 +72,8 @@ class CurriculumEdit extends Component {
           <Input value={this.state.curriculum.description} onChange={this.handleChange('description')} />
         </Form.Field>
 
-        <Button type='submit'>Submit</Button>
+        <Button type='submit' onClick={this.saveChanges}>Save</Button>
+        <Button type='submit'>Cancel</Button>
       </Form>
     );
   }
@@ -79,7 +84,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ getCurriculumById }, dispatch);
+  return bindActionCreators({ getCurriculumById, updateCurriculumById }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurriculumEdit);
