@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Button, Select, Table } from 'semantic-ui-react';
+import AcademicYearSelect from '../utils/academicYearSelect';
 
 import Moment from 'moment';
 
@@ -8,12 +9,16 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 class CurriculumTable extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   componentDidMount() {
     this.props.getLatestCurriculum(1);
   }
 
-  componentWillReceiveProps(props) {
-    console.log(props);
+  onSchoolYearChange = (e, data) => {
+    this.props.getLatestCurriculum(data.value);
   }
 
   renderCurriculums(curriculums) {
@@ -50,6 +55,7 @@ class CurriculumTable extends Component {
 
     return (
       <Container>
+        <AcademicYearSelect onSchoolYearChange={this.onSchoolYearChange} />
         <Table celled structured>
           <Table.Header>
             <Table.Row>
