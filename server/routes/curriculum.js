@@ -3,7 +3,10 @@ var router = express.Router();
 var connection = require('../database/connection');
 
 var getLatest = function (req, res) {
-  const query = 'SELECT * FROM `curriculum` ORDER BY curriculumDate DESC';
+  let year = req.params.year;
+
+  const query = `SELECT * FROM curriculum WHERE academicYear=${year} ORDER BY curriculumDate DESC`;
+
   connection.query(query, function (err, result) {
     if (err) {
       console.error(err);
@@ -14,6 +17,6 @@ var getLatest = function (req, res) {
   });
 };
 
-router.get('/latest', getLatest);
+router.get('/latest/:year', getLatest);
 
 module.exports = router;

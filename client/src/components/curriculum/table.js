@@ -9,7 +9,7 @@ import { bindActionCreators } from 'redux';
 
 class CurriculumTable extends Component {
   componentDidMount() {
-    this.props.getLatestCurriculum();
+    this.props.getLatestCurriculum(1);
   }
 
   componentWillReceiveProps(props) {

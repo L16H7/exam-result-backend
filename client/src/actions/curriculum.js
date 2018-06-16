@@ -10,8 +10,8 @@ import {
 
 const baseUrl = API_ENDPOINT + 'curriculum';
 
-export function getLatestCurriculum() {
-  const url = `${baseUrl}/latest`;
+export function getLatestCurriculum(year) {
+  const url = `${baseUrl}/latest/${year}`;
   const request = axios.get(url);
 
   return {

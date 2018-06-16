@@ -21,7 +21,7 @@ class CurriculumList extends Component {
   }
 
   componentDidMount() {
-    this.props.getLatestCurriculum();
+    this.props.getLatestCurriculum(1);
   }
 
   onLoadMore() {
