@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { Button, Container, Grid } from 'semantic-ui-react';
 import CurriculumCard from './card';
+import AcademicYearSelect from '../utils/academicYearSelect';
 
 import { getLatestCurriculum } from '../../actions/curriculum';
 import { connect } from 'react-redux';
@@ -11,8 +12,6 @@ import { bindActionCreators } from 'redux';
 class CurriculumList extends Component {
   constructor(props) {
     super(props);
-
-    this.onLoadMore = this.onLoadMore.bind(this);
 
     this.state = { 
       limit: 9
@@ -24,8 +23,12 @@ class CurriculumList extends Component {
     this.props.getLatestCurriculum(1);
   }
 
-  onLoadMore() {
+  onLoadMore = () => {
     this.setState({ limit: this.state.limit + 9 });
+  }
+
+  onSchoolYearChange = (e, data) => {
+    this.props.getLatestCurriculum(data.value);
   }
 
   renderCards(curriculums) {
@@ -74,6 +77,7 @@ class CurriculumList extends Component {
 
     return (
       <Container className="scrollable">
+        <AcademicYearSelect onSchoolYearChange={this.onSchoolYearChange} />
         <Grid>
           {this.renderCards(this.props.curriculum)}
         </Grid>
