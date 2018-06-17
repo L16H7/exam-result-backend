@@ -8,6 +8,8 @@ import { getLatestCurriculum } from '../../actions/curriculum';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import { Link } from 'react-router-dom';
+
 
 class CurriculumList extends Component {
   constructor(props) {
@@ -78,6 +80,9 @@ class CurriculumList extends Component {
     return (
       <Container className="scrollable">
         <AcademicYearSelect onSchoolYearChange={this.onSchoolYearChange} />
+        <Button>
+          <Link to='/curriculum/manage'>Edit</Link>
+        </Button>
         <Grid>
           {this.renderCards(this.props.curriculum)}
         </Grid>

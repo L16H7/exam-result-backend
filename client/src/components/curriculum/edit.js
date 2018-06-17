@@ -5,6 +5,8 @@ import { getCurriculumById, updateCurriculumById } from '../../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import { Link, withRouter } from 'react-router-dom';
+
 class CurriculumEdit extends Component {
   constructor(props) {
     super(props);
@@ -43,6 +45,7 @@ class CurriculumEdit extends Component {
 
   saveChanges = () => {
     this.props.updateCurriculumById(this.state.curriculum.id, this.state.curriculum);
+    this.props.history.push('/curriculum/manage');
   }
 
   render() {
@@ -72,7 +75,7 @@ class CurriculumEdit extends Component {
         </Form.Field>
 
         <Button type='submit' onClick={this.saveChanges}>Save</Button>
-        <Button type='submit'>Cancel</Button>
+        <Link to='/curriculum/manage'><Button type='submit'>Cancel</Button></Link>
       </Form>
     );
   }
@@ -86,4 +89,4 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ getCurriculumById, updateCurriculumById }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CurriculumEdit);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CurriculumEdit));

@@ -8,6 +8,8 @@ import { getLatestCurriculum } from '../../actions/curriculum';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import { Link } from 'react-router-dom';
+
 class CurriculumTable extends Component {
   constructor(props) {
     super(props);
@@ -37,7 +39,7 @@ class CurriculumTable extends Component {
           {data.description}
         </Table.Cell>
         <Table.Cell>
-          <Button>Edit</Button>
+          <Link to={`/curriculum/edit/${data.id}`}><Button>Edit</Button></Link>
           <Button>Delete</Button>
         </Table.Cell>
       </Table.Row>
