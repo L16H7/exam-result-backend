@@ -1,7 +1,8 @@
 import {
   FETCH_LATEST_CURRICULUM_SUCCESS,
   FETCH_CURRICULUM_BY_ID,
-  UPDATE_CURRICULUM_BY_ID
+  UPDATE_CURRICULUM_BY_ID,
+  INSERT_CURRICULUM
 } from '../constants/types';
 
 const INITIAL_STATE = {
@@ -16,6 +17,8 @@ export default function (state = INITIAL_STATE, action) {
       return action.payload.data;
     case UPDATE_CURRICULUM_BY_ID:
       return state;
+    case INSERT_CURRICULUM:
+      return action.payload;
   }
   return state;
 }

@@ -7,9 +7,9 @@ import TimeTableUpdate from '../components/timeTable/timeTableUpdate';
 class TimeTableScreen extends Component {
   render() {
     return (
-      <Container>
+      
         <TimeTableUpdate />
-      </Container>
+      
     );
   };
 }

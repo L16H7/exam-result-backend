@@ -4,14 +4,14 @@ import { Button, Container, Grid, GridColumn } from 'semantic-ui-react';
 import CurriculumCard from './card';
 import AcademicYearSelect from '../utils/academicYearSelect';
 
-import { getLatestCurriculum } from '../../actions/curriculum';
+import { getLatestAssignment } from '../../actions/assignment';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { Link } from 'react-router-dom';
 
 
-class CurriculumList extends Component {
+class AssignmentList extends Component {
   constructor(props) {
     super(props);
 
@@ -22,7 +22,7 @@ class CurriculumList extends Component {
   }
 
   componentDidMount() {
-    this.props.getLatestCurriculum(1);
+    this.props.getLatestAssignment(1);
   }
 
   onLoadMore = () => {
@@ -30,22 +30,22 @@ class CurriculumList extends Component {
   }
 
   onSchoolYearChange = (e, data) => {
-    this.props.getLatestCurriculum(data.value);
+    this.props.getLatestAssignment(data.value);
   }
 
-  renderCards(curriculums) {
+  renderCards(assignments) {
     let groups = [];
 
-    curriculums = curriculums.slice(0, this.state.limit);
-    if (curriculums.length) {
-      curriculums.forEach((item, index) => {
-        if (index % 3 === 0 && (index + 2) < curriculums.length) {
-          groups.push([curriculums[index], curriculums[index + 1], curriculums[index + 2]]);
+    assignments = assignments.slice(0, this.state.limit);
+    if (assignments.length) {
+      assignments.forEach((item, index) => {
+        if (index % 3 === 0 && (index + 2) < assignments.length) {
+          groups.push([assignments[index], assignments[index + 1], assignments[index + 2]]);
         }
-        if (index % 3 === 0 && (index + 2) > curriculums.length) {
+        if (index % 3 === 0 && (index + 2) > assignments.length) {
           let lastRemaining = [];
-          while (index < curriculums.length) {
-            lastRemaining.push(curriculums[index++]);
+          while (index < assignments.length) {
+            lastRemaining.push(assignments[index++]);
           }
           groups.push(lastRemaining);
         }
@@ -57,7 +57,7 @@ class CurriculumList extends Component {
           {cardData.map(card => 
             <Grid.Column key={card.id}>
               <CurriculumCard 
-                curriculumDate={card.curriculumDate}
+                assignmentDate={card.assignmentDate}
                 period={card.period}
                 subject={card.subject}
                 description={card.description}
@@ -71,9 +71,38 @@ class CurriculumList extends Component {
   }
 
   render() {
-    if (!this.props.curriculum.length) {
+    if (!this.props.assignment.length) {
       return (
-        <div></div>
+        <Grid columns='equal'>
+          <Grid.Row>
+            <Grid.Column width={3}>
+              <AcademicYearSelect onSchoolYearChange={this.onSchoolYearChange} />
+            </Grid.Column>
+
+            <Grid.Column width={1}>
+              <Button  positive>
+                  <Link className="white-text" to='/assignment/add'>Add</Link>
+              </Button>
+            </Grid.Column>
+
+            <Grid.Column width={1}>
+              <Button primary>
+                  <Link className="white-text" to='/assignment/manage'>Edit</Link>
+              </Button>
+            </Grid.Column>
+
+
+
+          </Grid.Row>
+
+
+          <Grid.Row>
+            
+            
+              <Button  className={'load-more'} style={{width:150}} onClick={this.onLoadMore} attached='bottom'>Load More</Button>
+            
+          </Grid.Row>
+        </Grid>
       );
     }
 
@@ -87,20 +116,20 @@ class CurriculumList extends Component {
 
             <Grid.Column width={1}>
               <Button  positive>
-                  <Link className="white-text" to='/curriculum/add'>Add</Link>
+                  <Link className="white-text" to='/assignment/add'>Add</Link>
               </Button>
             </Grid.Column>
 
             <Grid.Column width={1}>
               <Button primary>
-                  <Link className="white-text" to='/curriculum/manage'>Edit</Link>
+                  <Link className="white-text" to='/assignment/manage'>Edit</Link>
               </Button>
             </Grid.Column>
 
 
 
           </Grid.Row>
-          {this.renderCards(this.props.curriculum)}
+          {this.renderCards(this.props.assignment)}
 
           <Grid.Row>
             
@@ -120,7 +149,7 @@ const mapStateToProps = (state) => {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getLatestCurriculum }, dispatch);
+  return bindActionCreators({ getLatestAssignment }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CurriculumList);
+export default connect(mapStateToProps, mapDispatchToProps)(AssignmentList);

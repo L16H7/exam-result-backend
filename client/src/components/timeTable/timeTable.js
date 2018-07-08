@@ -34,7 +34,7 @@ class TimeTable extends Component {
     return (
       <Container>
         <Select placeholder='Select school year' options={schoolYears} onChange={this.changeSchoolYear} />
-        <Table celled structured>
+        <Table celled structured >
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell rowSpan='2'>Day/Time</Table.HeaderCell>

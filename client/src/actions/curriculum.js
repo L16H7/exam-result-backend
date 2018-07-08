@@ -3,7 +3,8 @@ import axios from 'axios';
 import {
   FETCH_LATEST_CURRICULUM_SUCCESS,
   FETCH_CURRICULUM_BY_ID,
-  UPDATE_CURRICULUM_BY_ID
+  UPDATE_CURRICULUM_BY_ID,
+  INSERT_CURRICULUM
 } from '../constants/types';
 
 import {
@@ -41,3 +42,13 @@ export function updateCurriculumById(id, newCurriculum) {
     payload: request
   }
 }
+
+  export function insertCurriculum(curriculum) {
+    const url = `${baseUrl}/insert/`;
+    const request = axios.post(url, curriculum);
+  
+    return {
+      type: INSERT_CURRICULUM,
+      payload: request
+    }
+  }

@@ -1,0 +1,16 @@
+import React, { Component } from 'react';
+import { Container } from 'semantic-ui-react';
+
+import FinalResult from '../components/result/finalResult';
+
+class FinalResultScreen extends Component {
+  render() {
+    return (
+      <Container>
+        <FinalResult/>
+      </Container>
+    );
+  };
+}
+
+export default FinalResultScreen;

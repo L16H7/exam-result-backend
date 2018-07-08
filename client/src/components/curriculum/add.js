@@ -1,34 +1,33 @@
 import React, { Component } from 'react';
 import { Button, Checkbox, Input, Form, Label } from 'semantic-ui-react';
 
-import { getCurriculumById, updateCurriculumById } from '../../actions';
+import { insertCurriculum} from '../../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { Link, withRouter } from 'react-router-dom';
 
-class CurriculumEdit extends Component {
+class CurriculumAdd extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       curriculum: {
-        id: 0,
-        curriculumDate: '2018-06-30',
+        curriculumDate: '',
         period: 0,
         subject: '',
+        academicYear:'',
         description: ''
       }
     }
   }
 
   componentDidMount() {
-    this.props.getCurriculumById(this.props.id);
+
   }
 
   componentWillReceiveProps(props) {
     let newCurriculum = props.curriculum[0];
-    // newCurriculum.curriculumDate=Moment(newCurriculum.curriculumDate).format('yyyy-mm-dd');
     newCurriculum.curriculumDate = newCurriculum.curriculumDate.slice(0, 10);
     
     this.setState({ curriculum: newCurriculum });
@@ -44,38 +43,42 @@ class CurriculumEdit extends Component {
     this.setState({ curriculum: newCurriculum });
   }
 
-  saveChanges = () => {
-    this.props.updateCurriculumById(this.state.curriculum.id, this.state.curriculum);
-    this.props.history.push('/curriculum/manage');
+  create = () => {
+    this.props.insertCurriculum(this.state.curriculum);
+    this.props.history.push('/curriculum');
   }
 
   render() {
-    if (!this.props.curriculum.length) {
-      return (
-        <h1>ERROR 404</h1>
-      );
-    }
+    // if (!this.props.curriculum.length) {
+    //   return (
+    //     <h1>ERROR 404</h1>
+    //   );
+    // }
 
     return (
       <Form>
         <Form.Field>
           <Label>Date</Label>
-          <input type='date' value={this.state.curriculum.curriculumDate} onChange={this.handleChange('curriculumDate')} />
+          <input type='date'  onChange={this.handleChange('curriculumDate')} />
         </Form.Field>
         <Form.Field>
           <Label>Period</Label>
-          <Input value={this.state.curriculum.period} onChange={this.handleChange('period')} />
+          <Input onChange={this.handleChange('period')} />
         </Form.Field>
         <Form.Field>
           <Label>Subject</Label>
-          <Input value={this.state.curriculum.subject} onChange={this.handleChange('subject')} />
+          <Input onChange={this.handleChange('subject')} />
+        </Form.Field>
+        <Form.Field>
+          <Label>Academic Year</Label>
+          <Input onChange={this.handleChange('academicYear')} />
         </Form.Field>
         <Form.Field>
           <Label>Description</Label>
-          <Input value={this.state.curriculum.description} onChange={this.handleChange('description')} />
+          <Input  onChange={this.handleChange('description')} />
         </Form.Field>
 
-        <Button type='submit' onClick={this.saveChanges}>Save</Button>
+        <Button type='submit' onClick={this.create}>Save</Button>
         <Link to='/curriculum/manage'><Button type='submit'>Cancel</Button></Link>
       </Form>
     );
@@ -87,7 +90,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ getCurriculumById, updateCurriculumById }, dispatch);
+  return bindActionCreators({ insertCurriculum }, dispatch);
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CurriculumEdit));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CurriculumAdd));

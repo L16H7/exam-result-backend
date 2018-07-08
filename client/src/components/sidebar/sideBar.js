@@ -17,7 +17,7 @@ class SideBar extends Component {
               <Link to='/'>Home</Link>
             </Menu.Item>
             <Menu.Item name='result'>
-              <Link to='/result'>Result</Link>
+              <Link to='/finalResult'>Result</Link>
             </Menu.Item>
             <Menu.Item name='timetable'>
               <Link to='/timetable'>Time Table</Link>

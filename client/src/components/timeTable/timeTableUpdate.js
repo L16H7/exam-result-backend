@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Icon, Input, Label, Radio, Select, Table } from 'semantic-ui-react';
+import { Container, Icon, Input, Label, Radio, Select, Table ,Grid, GridColumn} from 'semantic-ui-react';
 
 import { getTimeTable, updatePeriodSubject } from '../../actions';
 import { schoolYears } from '../../constants/schoolYears';
@@ -32,6 +32,7 @@ class TimeTableUpdate extends Component {
 
   changeSchoolYear(e, data) {
     this.props.getTimeTable(data.value);
+    console.log(this.props.timeTable);
   }
 
   convertDayIdToDayName(id) {
@@ -111,43 +112,70 @@ class TimeTableUpdate extends Component {
   render() {
     if (!this.state.timeTableData.length) return (
       <Container>
-        <Select placeholder='Select school year' options={schoolYears} onChange={this.changeSchoolYear} />
-        <Radio toggle onChange={this.toggleEditableTable} checked={this.state.isInputEnable} />
+        <Grid columns='equal'>
+          <Grid.Row>
+
+            <Grid.Column>
+              <Select placeholder='Select school year' options={schoolYears} onChange={this.changeSchoolYear} />
+            </Grid.Column>
+
+            <Grid.Column textAlign='right'>
+              <Radio toggle onChange={this.toggleEditableTable} checked={this.state.isInputEnable} />
+            </Grid.Column>
+
+          </Grid.Row>
+        </Grid>
+        
+        
       </Container>
     );
 
     return (
       <Container>
-        <Select placeholder='Select school year' options={schoolYears} onChange={this.changeSchoolYear} />
-        <Radio toggle onChange={this.toggleEditableTable} checked={this.state.isInputEnable} />
-        <Table celled structured>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell rowSpan='2'>Day/Time</Table.HeaderCell>
-            <Table.HeaderCell rowSpan='2'>Period-1<br/>8:30-9:30 am</Table.HeaderCell>
-            <Table.HeaderCell rowSpan='2'>Period-2<br/>9:35-10:35 am</Table.HeaderCell>
-            <Table.HeaderCell rowSpan='2'>Period-3<br/>10:40-11:40 am</Table.HeaderCell>
-            <Table.HeaderCell rowSpan='5'></Table.HeaderCell>
-            <Table.HeaderCell rowSpan='2'>Period-4<br/>8:30-9:30 am</Table.HeaderCell>
-            <Table.HeaderCell rowSpan='2'>Period-5<br/>9:35-10:35 am</Table.HeaderCell>
-            <Table.HeaderCell rowSpan='2'>Period-6<br/>10:40-11:40 am</Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-    
-        <Table.Body>
+        <Grid columns='equal'>
+          <Grid.Row>
 
-          <Table.Row>
-            <Table.Cell></Table.Cell>
-            <Table.Cell></Table.Cell>
-            <Table.Cell></Table.Cell>
-            <Table.Cell></Table.Cell>
-            <Table.Cell  rowSpan='6' ><div className='vertical_text'>Lunch Break (11:40 - 12:40 pm)</div> </Table.Cell>
-            <Table.Cell></Table.Cell>
-            <Table.Cell></Table.Cell>
-          </Table.Row>
-          {this.renderPeriods(this.state.timeTableData)}
-        </Table.Body>
-        </Table>
+            <Grid.Column>
+              <Select placeholder='Select school year' options={schoolYears} onChange={this.changeSchoolYear} />
+            </Grid.Column>
+
+            <Grid.Column textAlign='right'>
+              <Radio  toggle onChange={this.toggleEditableTable} checked={this.state.isInputEnable} />
+            </Grid.Column>
+
+          </Grid.Row>
+          <Grid.Row>
+            <Table celled structured size='small'>
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell rowSpan='2'>Day/Time</Table.HeaderCell>
+                  <Table.HeaderCell rowSpan='2'>Period-1<br/>8:30-9:30 am</Table.HeaderCell>
+                  <Table.HeaderCell rowSpan='2'>Period-2<br/>9:35-10:35 am</Table.HeaderCell>
+                  <Table.HeaderCell rowSpan='2'>Period-3<br/>10:40-11:40 am</Table.HeaderCell>
+                  <Table.HeaderCell rowSpan='5'></Table.HeaderCell>
+                  <Table.HeaderCell rowSpan='2'>Period-4<br/>8:30-9:30 am</Table.HeaderCell>
+                  <Table.HeaderCell rowSpan='2'>Period-5<br/>9:35-10:35 am</Table.HeaderCell>
+                  <Table.HeaderCell rowSpan='2'>Period-6<br/>10:40-11:40 am</Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+        
+              <Table.Body>
+                <Table.Row>
+                  <Table.Cell></Table.Cell>
+                  <Table.Cell></Table.Cell>
+                  <Table.Cell></Table.Cell>
+                  <Table.Cell></Table.Cell>
+                  <Table.Cell  rowSpan='6' ><div className='vertical_text'>Lunch Break (11:40 - 12:40 pm)</div> </Table.Cell>
+                  <Table.Cell></Table.Cell>
+                  <Table.Cell></Table.Cell>
+                </Table.Row>
+                {this.renderPeriods(this.state.timeTableData)}
+              </Table.Body>
+            </Table>
+          </Grid.Row>
+        </Grid>
+
+
       </Container>
     );
   }

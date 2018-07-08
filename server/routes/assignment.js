@@ -5,7 +5,7 @@ var connection = require('../database/connection');
 var getLatest = function (req, res) {
   let year = req.params.year;
 
-  const query = `SELECT * FROM curriculum WHERE academicYear=${year} ORDER BY curriculumDate DESC`;
+  const query = `SELECT * FROM assignment WHERE academicYear=${year}  ORDER BY assignmentDate DESC,id DESC`;
 
   connection.query(query, function (err, result) {
     if (err) {
@@ -17,10 +17,10 @@ var getLatest = function (req, res) {
   });
 };
 
-var getCurriculumById = function (req, res) {
+var getAssignmentById = function (req, res) {
   let id = req.params.id;
 
-  const query = `SELECT * FROM curriculum WHERE id=${id}`;
+  const query = `SELECT * FROM assignment WHERE id=${id}`;
 
   connection.query(query, function (err, result) {
     if (err) {
@@ -32,11 +32,11 @@ var getCurriculumById = function (req, res) {
   });
 };
 
-var updateCurriculumById = function (req, res) {
+var updateAssignmentById = function (req, res) {
   let id = req.params.id;
-  const { curriculumDate, period, subject, description } = req.body;
+  const { assignmentDate, period, subject, description } = req.body;
 
-  const query = `UPDATE curriculum SET curriculumDate='${curriculumDate}', period=${period}, 
+  const query = `UPDATE assignment SET assignmentDate='${assignmentDate}', period=${period}, 
                  subject='${subject}', description='${description}' WHERE id=${id}`;
 
   connection.query(query, function (err, result) {
@@ -49,11 +49,11 @@ var updateCurriculumById = function (req, res) {
   });
 }
 
-var insertCurriculum = function (req, res) {
+var insertAssignment = function (req, res) {
 
-  const { curriculumDate, period, subject, description,academicYear } = req.body;
-  const query = `INSERT INTO curriculum (curriculumDate,period,subject,description,academicYear) 
-                 VALUES ('${curriculumDate}',${period},'${subject}','${description}',${academicYear})`;
+  const { assignmentDate, period, subject, description,academicYear } = req.body;
+  const query = `INSERT INTO assignment (assignmentDate,period,subject,description,academicYear) 
+                 VALUES ('${assignmentDate}',${period},'${subject}','${description}',${academicYear})`;
   
   connection.query(query, function (err, result) {
     if (err) {
@@ -66,8 +66,8 @@ var insertCurriculum = function (req, res) {
 }
 
 router.get('/latest/:year', getLatest);
-router.get('/:id', getCurriculumById);
-router.put('/:id', updateCurriculumById);
-router.post('/insert',insertCurriculum);
+router.get('/:id', getAssignmentById);
+router.put('/:id', updateAssignmentById);
+router.post('/insert',insertAssignment);
 
 module.exports = router;
