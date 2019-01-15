@@ -29,7 +29,7 @@
     "semantic-ui-css": "^2.3.1",
     "semantic-ui-react": "^0.80.2",
     "webpack": "^1.15.0",
-    "webpack-dev-server": "^1.14.0"
+    "webpack-dev-server": ">=3.1.11"
   },
   "dependencies": {
     "babel-preset-stage-1": "^6.1.18",
